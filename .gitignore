@@ -1,0 +1,19 @@
+*~
+*.a
+*.o
+*.d
+.vscode
+.vscode/*
+*.test
+__*
+doc/
+*.mp4
+*.mp3
+webserv
+ubuntu_tester
+ubuntu_cgi_tester
+<<<<<<< HEAD
+!docker_test/webserv
+=======
+YoupiBanane/*
+>>>>>>> leo

@@ -1,0 +1,29 @@
+server:
+  listen: 127.0.0.1:8086
+  root: /mnt/nfs/homes/lgiband/cursus/circle_5/v3/YoupiBanane
+  index: youpi.bad_extension
+  autoindex: on
+  location: /directory/
+    root: /mnt/nfs/homes/lgiband/cursus/circle_5/v3/YoupiBanane/directory
+    post_dir: /mnt/nfs/homes/lgiband/cursus/circle_5/v3/YoupiBanane/
+    index: youpi.bad_extension
+    autoindex: on
+    permissions: 6
+    max_body_size: 320000000
+    cgi:
+      bla: /mnt/nfs/homes/lgiband/cursus/circle_5/v3/ubuntu_cgi_tester
+  location: /directory/Yeah
+    root: /mnt/nfs/homes/lgiband/cursus/circle_5/v3/YoupiBanane/directory/Yeah
+    index: youpi.bad_extension
+    autoindex: off
+    
+  location: /post_body
+    max_body_size: 100
+    cgi:
+      bla: /mnt/nfs/homes/lgiband/cursus/circle_5/v3/ubuntu_cgi_tester
+  location: /Yeah/
+  location: /
+    permissions: 4
+  location: /put_test/
+    post_dir: /mnt/nfs/homes/lgiband/cursus/circle_5/v3/YoupiBanane/
+    permissions: 7

@@ -1,0 +1,67 @@
+server:
+  listen: 0.0.0.0:8080
+  root: /home/seriots/42_cursus/webserv/pages/www
+  server_name: Webserv
+  index: index.html
+  permissions: 7
+  max_body_size: 32000000
+  autoindex: off
+  error_pages:
+    404: /home/seriots/42_cursus/webserv/pages/error/404.html
+    405: /home/seriots/42_cursus/webserv/pages/error/405.html
+  location: /
+    post_dir: /home/seriots/42_cursus/webserv/pages/www/upload
+    max_body_size: 32000000
+    cgi:
+      pl: /bin/perl
+      perl: /bin/perl
+      php: /bin/php-cgi
+      py: /bin/python3
+
+  location: /ou
+    default_file: /home/seriots/42_cursus/webserv/pages/www/oui/ANon.html
+    post_dir: /home/seriots/42_cursus/webserv/pages/www/upload
+    root: /home/seriots/42_cursus/webserv/pages/www/
+    index: test.php
+    permissions: 7
+    max_body_size: 4096
+    autoindex: off
+  location: /upload
+    root: /home/seriots/42_cursus/webserv/pages/www/upload
+    autoindex: on
+  location: /upload/ici/
+    redirect: http://0.0.0.0:8080/upload/
+
+server:
+  listen: 0.0.0.0:8081
+  root: /home/seriots/42_cursus/webserv/pages/www2
+  server_name: Webserv_mirror
+  index: index.html
+  permissions: 7
+  max_body_size: 32000000
+  autoindex: off
+  error_pages:
+    404: /home/seriots/42_cursus/webserv/pages/error/404.html
+    405: /home/seriots/42_cursus/webserv/pages/error/405.html
+  location: /
+    post_dir: /home/seriots/42_cursus/webserv/pages/www2/upload
+    max_body_size: 32000000
+    cgi:
+      pl: /bin/perl
+      perl: /bin/perl
+      php: /bin/php-cgi
+      py: /bin/python3
+
+  location: /ou
+    default_file: /home/seriots/42_cursus/webserv/pages/www2/oui/ANon.html
+    post_dir: /home/seriots/42_cursus/webserv/pages/www2/upload
+    root: /home/seriots/42_cursus/webserv/pages/www2/
+    index: test.php
+    permissions: 7
+    max_body_size: 4096
+    autoindex: off
+  location: /upload
+    root: /home/seriots/42_cursus/webserv/pages/www2/upload
+    autoindex: on
+  location: /upload/ici/
+    redirect: http://0.0.0.0:8080/upload/

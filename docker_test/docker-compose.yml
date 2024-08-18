@@ -1,0 +1,89 @@
+services:
+  webserv:
+    container_name: webserv
+    build:
+      context: ./webserv
+    volumes:
+      - server_data:/home/server
+    stop_signal: SIGINT
+    ports:
+      - "8080:8080"
+    networks:
+      inside:
+        ipv4_address: 192.168.13.1
+      outside:
+        ipv4_address: 192.168.12.1
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "8080"]
+      interval: 5s
+
+  in:
+    container_name: in
+    build:
+      context: ./default
+      target: iner
+      dockerfile: Dockerfile
+    networks:
+      inside:
+        ipv4_address: 192.168.13.2
+    extra_hosts:
+      - "webserv.42.fr:192.168.13.1"
+      - "in.webserv.42.fr:192.168.13.1"
+    depends_on:
+      webserv:
+        condition: service_healthy
+    volumes:
+      - files_data:/root
+
+  out:
+    container_name: outside
+    build:
+      context: ./default
+      target: outer
+      dockerfile: Dockerfile
+    networks:
+      outside:
+        ipv4_address: 192.168.12.2
+    extra_hosts:
+      - "webserv.42.fr:192.168.12.1"
+      - "out.webserv.42.fr:192.168.12.1"
+    depends_on:
+      in:
+        condition: service_completed_successfully
+    volumes:
+      - files_data:/root
+
+volumes:
+  server_data:
+    name: server_data
+    driver: local
+    driver_opts:
+      device: "/mnt/nfs/homes/gtoubol/Documents/webserv"
+      type: none
+      o: bind
+
+  files_data:
+    name: files_data
+    driver: local
+    driver_opts:
+      device: "/mnt/nfs/homes/gtoubol/Documents/webserv/docker_test/webserv"
+      type: none
+      o: bind
+
+
+networks:
+  outside:
+    name: outside
+    driver: "bridge"
+    ipam:
+      config:
+        - subnet: 192.168.12.0/24
+          gateway: 192.168.12.254
+
+  inside:
+    name: inside
+    driver: "bridge"
+    ipam:
+      config:
+        - subnet: 192.168.13.0/24
+          gateway: 192.168.13.254

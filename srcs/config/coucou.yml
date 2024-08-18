@@ -1,0 +1,12 @@
+server:
+  server_name: test
+  listen: 0.0.0.0:80
+
+server:
+  listen: 127.0.0.1:80
+
+server:
+  listen: 0.0.0.0:18
+
+server:
+  listen: localhost:80

@@ -1,0 +1,62 @@
+server:
+  listen: 0.0.0.0:8080
+  root: /mnt/nfs/homes/gtoubol/Documents/webserv/test_folder/
+  server_name: myname
+  index: index.html
+  permissions: 7
+  max_body_size: 32000000
+  autoindex: off
+  error_pages:
+    404: /mnt/nfs/homes/gtoubol/Documents/webserv/test_error/404.html
+  location: /
+    post_dir: /mnt/nfs/homes/gtoubol/Documents/webserv/test_folder/upload
+    max_body_size: 32000000
+    cgi:
+      php: /bin/php-cgi
+
+  location: /ou/
+    cgi:
+      php: /bin/php-cgi
+    default_file: /mnt/nfs/homes/gtoubol/Documents/webserv/test_folder/ou/ANon.html
+    post_dir: /mnt/nfs/homes/gtoubol/Documents/webserv/test_folder/
+    root: /mnt/nfs/homes/gtoubol/Documents/webserv/test_folder/ou/
+    index: index.html
+    permissions: 4
+    max_body_size: 4096
+    autoindex: off
+  location: /upload
+    root: /mnt/nfs/homes/gtoubol/Documents/webserv/test_folder/upload
+    autoindex: on
+  location: /upload/ici/
+    redirect: http:/localhost:8080/upload/
+
+server:
+  listen: localhost:8080
+  root: /mnt/nfs/homes/gtoubol/Documents/webserv/test_folder2/
+  server_name: myname
+  index: index.html
+  permissions: 7
+  max_body_size: 32000000
+  autoindex: off
+  error_pages:
+    404: /mnt/nfs/homes/gtoubol/Documents/webserv/test_error/404.html
+    405: /mnt/nfs/homes/gtoubol/Documents/webserv/test_error/405.html
+  location: /
+    post_dir: /mnt/nfs/homes/gtoubol/Documents/webserv/test_folder2/upload
+    max_body_size: 32000000
+    cgi:
+      php: /bin/php-cgi
+
+  location: /ou/
+    default_file: /mnt/nfs/homes/gtoubol/Documents/webserv/test_folder2/ou/ANon.html
+    post_dir: /mnt/nfs/homes/gtoubol/Documents/webserv/test_folder2/upload
+    root: /mnt/nfs/homes/gtoubol/Documents/webserv/test_folder2/
+    index: index.html
+    permissions: 7
+    max_body_size: 4096
+    autoindex: off
+  location: /upload
+    root: /mnt/nfs/homes/gtoubol/Documents/webserv/test_folder2/upload
+    autoindex: on
+  location: /upload/ici/
+    redirect: http:/localhost:8080/upload/

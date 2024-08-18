@@ -1,0 +1,30 @@
+server:
+  listen: 0.0.0.0:8080
+  root: /home/fmauguin_wsl/ecole42/webserv_vog/test_folder
+  server_name: myname
+  index: index.php
+  permissions: 7
+  max_body_size: 32000000
+  autoindex: off
+  error_pages:
+    404: /home/fmauguin_wsl/ecole42/webserv_vog/test_error/404.html
+    405: /home/fmauguin_wsl/ecole42/webserv_vog/test_error/405.html
+  location: /
+    post_dir: /home/fmauguin_wsl/ecole42/webserv_vog/test_folder/upload
+    max_body_size: 32000000
+    cgi:
+      php: /bin/php-cgi
+    
+  location: /oui
+    default_file: /home/fmauguin_wsl/ecole42/webserv_vog/test_folder/oui/ANon.html
+    post_dir: /home/fmauguin_wsl/ecole42/webserv_vog/test_folder/upload
+    root: /home/fmauguin_wsl/ecole42/webserv_vog/test_folder/
+    index: test.php
+    permissions: 7
+    max_body_size: 4096
+    autoindex: off
+  location: /upload
+    root: /home/fmauguin_wsl/ecole42/webserv_vog/test_folder/upload
+    autoindex: on
+  location: /upload/ici/
+    redirect: http://0.0.0.0:8080/upload/

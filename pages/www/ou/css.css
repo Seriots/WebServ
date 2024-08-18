@@ -1,0 +1,15 @@
+h1{
+	color:aquamarine;
+	font-size: 20px;
+}
+
+h2 {
+	color:red;
+	font-size: 50px;
+	text-align: center;
+	height: auto;
+}
+
+h2:hover {
+	color:blue;
+}

@@ -1,0 +1,33 @@
+server:
+  listen: 0.0.0.0:8080
+  root: /mnt/nfs/homes/fmauguin/Documents/Webserv-vog/test_folder
+  server_name: myname
+  index: index.html
+  permissions: 7
+  max_body_size: 32000000
+  autoindex: off
+  error_pages:
+    404: /mnt/nfs/homes/fmauguin/Documents/Webserv-vog/test_error/404.html
+    405: /mnt/nfs/homes/fmauguin/Documents/Webserv-vog/test_error/405.html
+  location: /
+    post_dir: /mnt/nfs/homes/fmauguin/Documents/Webserv-vog/test_folder/upload
+    max_body_size: 32000000
+    cgi:
+      pl: /bin/perl
+      perl: /bin/perl
+      php: /bin/php
+      py: /bin/python3
+    
+  location: /oui
+    default_file: /mnt/nfs/homes/fmauguin/Documents/Webserv-vog/test_folder/oui/ANon.html
+    post_dir: /mnt/nfs/homes/fmauguin/Documents/Webserv-vog/test_folder/upload
+    root: /mnt/nfs/homes/fmauguin/Documents/Webserv-vog/test_folder/
+    index: test.php
+    permissions: 7
+    max_body_size: 4096
+    autoindex: off
+  location: /upload
+    root: /mnt/nfs/homes/fmauguin/Documents/Webserv-vog/test_folder/upload
+    autoindex: on
+  location: /upload/ici/
+    redirect: http://0.0.0.0:8080/upload/

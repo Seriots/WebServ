@@ -1,0 +1,30 @@
+map->insert( std::make_pair( 200, "OK") );
+map->insert( std::make_pair( 201, "Created") );
+map->insert( std::make_pair( 204, "No Content") );
+map->insert( std::make_pair( 301, "Moved Permanently") );
+map->insert( std::make_pair( 304, "Not Modified") );
+map->insert( std::make_pair( 400, "Bad Request") ); // syntaxe error
+map->insert( std::make_pair( 401, "Unauthorized") ); // must send WWW-Authenticate header with it
+map->insert( std::make_pair( 403, "Forbidden") ); // when you do not hqve the right to access the resource, can be replaced bu 404 if you dont want to give info
+map->insert( std::make_pair( 404, "Not Found") ); // when the resource is not found, is the ressource would never be found prefer 410
+map->insert( std::make_pair( 405, "Method Not Allowed") ); // need to add allow header, method known but not allowed
+map->insert( std::make_pair( 406, "Not Acceptable") ); // when the resource is not acceptable, need to add Accept header (pas compris mais c'est en rapport avec le content type et tous les fields accept)
+map->insert( std::make_pair( 407, "Proxy Authentication Required") ); // like 401 but for proxy, need to add Proxy-Authenticate header by client side
+map->insert( std::make_pair( 408, "Request Timeout") ); // the server wait more than (une valeur) for the request to be completed, can add retry after header
+map->insert( std::make_pair( 409, "Conflict") ); // use by PUT
+map->insert( std::make_pair( 410, "Gone") ); // the real 404
+map->insert( std::make_pair( 411, "Length Required") ); // need to add Content-Length header
+map->insert( std::make_pair( 412, "Precondition Failed") ); //bas de page
+map->insert( std::make_pair( 413, "Content Too Large") ); //check the server limitation and if the content is more than that send it 
+map->insert( std::make_pair( 414, "URI Too Long") ); // check the server limitation and if the uri is more than that send it
+map->insert( std::make_pair( 415, "Unsupported Media Type") );
+map->insert( std::make_pair( 416, "Range Not Satisfiable") );
+map->insert( std::make_pair( 500, "Internal Server Error") );
+map->insert( std::make_pair( 501, "Not Implemented") );
+map->insert( std::make_pair( 505, "HTTP Version Not Supported") );
+// need to check If-Match(strong comparison),
+//If-None-Match(week comparison->GETetHEAD send 304, else send 412),
+//If-Modified-Since, take an http date in arguments (If-Modified-Since: Sat, 29 Oct 1994 19:43:31 GMT) if an error format appears, skip it, if (if-None-Match) is present, skip it, if method are anything else than GET or HEAD, skip it, if the resource is not found, skip it, resource does not have a modification date available, skip it, If the selected representation's last modification date is earlier or equal to the date provided in the field value, the condition is false, else is true, send error 304
+//If-Unmodified-Since header, like If-Modified-Since but the opposite, if-Match instead of If-None-Match, If the selected representation's last modification date is earlier than or equal to the date provided in the field value, the condition is true. Otherwise, the condition is false, if fail send 412
+//If-Range,
+//"*" = everything but if "*", "*" or "*", "other" appears, its invalid syntax
